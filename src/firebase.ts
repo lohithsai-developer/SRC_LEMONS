@@ -157,41 +157,46 @@ export async function fbGetCustomers(): Promise<Customer[]> {
 
 export async function fbSaveCustomer(cust: Omit<Customer, 'id'>, existingId?: string): Promise<Customer> {
   const now = new Date().toISOString();
+  let savedId = existingId || `cust-${Date.now()}`;
+
   if (isFirebaseLive && db) {
     try {
       if (existingId) {
         const ref = doc(db, 'customers', existingId);
         await updateDoc(ref, { ...cust, updatedAt: now });
-        return { id: existingId, ...cust, updatedAt: now } as Customer;
+        savedId = existingId;
       } else {
         const colRef = collection(db, 'customers');
         const docRef = await addDoc(colRef, { ...cust, createdAt: now, updatedAt: now });
-        return { id: docRef.id, ...cust, createdAt: now, updatedAt: now } as Customer;
+        savedId = docRef.id;
       }
-    } catch (e) {
-      console.warn('Firestore save failed, saving locally:', e);
+      console.log('✅ Customer synced to Firebase Firestore:', savedId);
+    } catch (e: any) {
+      console.error('❌ Firestore customer save failed (Check Firestore Rules!):', e);
+      alert(`Firebase customer sync error: ${e?.message || 'Check Firestore security rules'}`);
     }
   }
 
   const list = getLocal<Customer[]>('customers', DEFAULT_CUSTOMERS);
+  const fullCust: Customer = {
+    ...cust,
+    id: savedId,
+    createdAt: (cust as any).createdAt || now,
+    updatedAt: now,
+  };
+
   if (existingId) {
     const idx = list.findIndex((c) => c.id === existingId);
     if (idx >= 0) {
-      list[idx] = { ...list[idx], ...cust, updatedAt: now };
-      setLocal('customers', list);
-      return list[idx];
+      list[idx] = fullCust;
+    } else {
+      list.unshift(fullCust);
     }
+  } else {
+    list.unshift(fullCust);
   }
-
-  const newCust: Customer = {
-    id: `cust-${Date.now()}`,
-    ...cust,
-    createdAt: now,
-    updatedAt: now,
-  };
-  list.unshift(newCust);
   setLocal('customers', list);
-  return newCust;
+  return fullCust;
 }
 
 export async function fbDeleteCustomer(id: string): Promise<boolean> {
@@ -222,41 +227,49 @@ export async function fbGetBills(): Promise<Bill[]> {
 
 export async function fbSaveBill(billData: Omit<Bill, 'id'>, existingId?: string): Promise<Bill> {
   const now = new Date().toISOString();
+  let savedId = existingId || `bill-${Date.now()}`;
+
   if (isFirebaseLive && db) {
     try {
       if (existingId) {
         const ref = doc(db, 'bills', existingId);
         await updateDoc(ref, { ...billData, updatedAt: now });
-        return { id: existingId, ...billData, updatedAt: now } as Bill;
+        savedId = existingId;
       } else {
         const colRef = collection(db, 'bills');
         const docRef = await addDoc(colRef, { ...billData, createdAt: now, updatedAt: now });
-        return { id: docRef.id, ...billData, createdAt: now, updatedAt: now } as Bill;
+        savedId = docRef.id;
       }
-    } catch (e) {
-      console.warn('Firestore bill save failed, saving locally:', e);
+      console.log('✅ Bill synced to Firebase Firestore:', savedId);
+    } catch (e: any) {
+      console.error('❌ Firestore bill save error (Check Firestore Rules!):', e);
+      alert(`Firebase sync error: ${e?.message || 'Check Firestore security rules in Firebase Console'}`);
     }
+  } else {
+    console.warn('⚠️ Firebase is not connected or db is null');
   }
 
+  // Always update local cache so app stays fast
   const list = getLocal<Bill[]>('bills', []);
+  const fullBill: Bill = {
+    ...billData,
+    id: savedId,
+    createdAt: (billData as any).createdAt || now,
+    updatedAt: now,
+  };
+
   if (existingId) {
     const idx = list.findIndex((b) => b.id === existingId);
     if (idx >= 0) {
-      list[idx] = { ...list[idx], ...billData, updatedAt: now };
-      setLocal('bills', list);
-      return list[idx];
+      list[idx] = fullBill;
+    } else {
+      list.unshift(fullBill);
     }
+  } else {
+    list.unshift(fullBill);
   }
-
-  const newBill: Bill = {
-    id: `bill-${Date.now()}`,
-    ...billData,
-    createdAt: now,
-    updatedAt: now,
-  };
-  list.unshift(newBill);
   setLocal('bills', list);
-  return newBill;
+  return fullBill;
 }
 
 export async function fbDeleteBill(id: string): Promise<boolean> {

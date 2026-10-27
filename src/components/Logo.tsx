@@ -33,14 +33,12 @@ export const Logo: React.FC<LogoProps> = ({
       </div>
 
       {showText && (
-        <div>
-          <div className="flex items-center space-x-1.5">
-            <h1 className="text-lg font-black text-charcoal-900 leading-tight tracking-tight">
-              SRC LEMONS
-            </h1>
-          </div>
-          <p className="text-xs text-fresh-700 font-bold tracking-wide">
-            {subtitle || 'Daily Billing & Management'}
+        <div className="flex flex-col">
+          <h1 className="text-base sm:text-lg font-black text-charcoal-900 leading-tight tracking-tight">
+            SRC LEMONS
+          </h1>
+          <p className="text-[10px] sm:text-xs text-fresh-700 font-bold tracking-wide">
+            {subtitle || 'Billing & Accounts'}
           </p>
         </div>
       )}

@@ -338,14 +338,11 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
 
                       <div className="min-w-0">
                         <div className="flex items-center space-x-2">
-                          <h4 className="text-sm sm:text-base font-extrabold text-charcoal-900 truncate group-hover:text-amber-950">
+                          <h4 className="text-sm font-extrabold text-charcoal-900 group-hover:text-amber-950">
                             {bill.customer.name}
                           </h4>
-                          <span className="font-mono text-[11px] text-slate-400 flex-shrink-0">
-                            {bill.billNumber}
-                          </span>
                         </div>
-                        <p className="text-xs text-slate-500 font-mono mt-0.5 truncate">
+                        <p className="text-xs text-slate-500 font-mono mt-0.5">
                           📱 {bill.customer.mobile} {bill.customer.village ? `• 📍 ${bill.customer.village}` : ''}
                         </p>
                       </div>

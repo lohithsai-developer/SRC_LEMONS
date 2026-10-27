@@ -41,7 +41,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="flex items-center cursor-pointer select-none"
             onClick={() => setActiveTab('dashboard')}
           >
-            <Logo size="md" showText={true} subtitle="SRC LEMONS" />
+            <Logo size="md" showText={true} />
           </div>
 
           {/* Desktop Navigation Links - Clean, Professional & Subtle */}

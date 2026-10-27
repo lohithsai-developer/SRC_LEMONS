@@ -354,17 +354,17 @@ export const NewBillPage: React.FC<NewBillPageProps> = ({
       {/* Main Weighing Form: ONLY Customer & Weights! */}
       <form onSubmit={handleSaveWeightsOnly} className="space-y-6">
         {/* 1. Farmer Selection */}
-        <div className="bg-white p-5 sm:p-6 rounded-3xl border border-slate-200 shadow-xs space-y-4">
-          <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+        <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs space-y-3">
+          <div className="flex items-center justify-between pb-1 border-b border-slate-100">
             <span className="text-xs font-bold uppercase tracking-wider text-charcoal-800 flex items-center space-x-1.5">
               <User className="w-4 h-4 text-fresh-600" />
-              <span>Select Farmer / Customer *</span>
+              <span>Select Farmer *</span>
             </span>
 
             <button
               type="button"
               onClick={onOpenAddCustomerModal}
-              className="px-3 py-1 rounded-xl bg-lemon-100 hover:bg-lemon-200 text-amber-900 font-bold text-xs border border-lemon-300 transition"
+              className="px-3 py-1 rounded-xl bg-lemon-400 hover:bg-lemon-500 text-charcoal-950 font-bold text-xs shadow-2xs transition"
             >
               + New Farmer
             </button>
@@ -373,14 +373,14 @@ export const NewBillPage: React.FC<NewBillPageProps> = ({
           <div className="relative">
             <input
               type="text"
-              placeholder="Type farmer name or mobile..."
+              placeholder="Search or select farmer..."
               value={customerSearch}
               onChange={(e) => {
                 setCustomerSearch(e.target.value);
                 setIsCustomerDropdownOpen(true);
               }}
               onFocus={() => setIsCustomerDropdownOpen(true)}
-              className="w-full px-4 py-3 rounded-2xl border border-slate-300 font-medium text-sm bg-slate-50 focus:outline-none focus:ring-2 focus:ring-lemon-400"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 font-medium text-sm bg-slate-50 focus:outline-none focus:ring-2 focus:ring-lemon-400"
             />
 
             {isCustomerDropdownOpen && (
@@ -429,29 +429,29 @@ export const NewBillPage: React.FC<NewBillPageProps> = ({
           </div>
 
           {selectedCustomer && (
-            <div className="p-3.5 bg-fresh-50/80 rounded-2xl border border-fresh-200 flex items-center justify-between text-xs">
+            <div className="p-3 bg-fresh-50 rounded-xl border border-fresh-200 flex items-center justify-between text-xs">
               <div>
                 <p className="font-bold text-fresh-900 text-sm">{selectedCustomer.name}</p>
-                <p className="text-fresh-700 font-mono">
+                <p className="text-fresh-700 font-mono text-[11px]">
                   📱 {selectedCustomer.mobile} {selectedCustomer.village ? `• ${selectedCustomer.village}` : ''}
                 </p>
               </div>
-              <span className="text-xs px-2.5 py-1 rounded-full bg-fresh-200 text-fresh-900 font-bold">
-                Farmer Selected
+              <span className="text-[11px] px-2.5 py-0.5 rounded-full bg-fresh-200 text-fresh-900 font-bold">
+                Selected ✓
               </span>
             </div>
           )}
         </div>
 
         {/* 2. Large Bags Section */}
-        <div className="bg-white p-5 sm:p-6 rounded-3xl border border-slate-200 shadow-xs space-y-4">
-          <div className="flex flex-wrap items-center justify-between pb-2 border-b border-slate-100 gap-2">
+        <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs space-y-3">
+          <div className="flex items-center justify-between pb-1 border-b border-slate-100 gap-2">
             <div>
               <span className="text-xs font-bold uppercase tracking-wider text-charcoal-900 flex items-center space-x-1.5">
                 <span className="text-base">🛍️</span>
-                <span>{t('largeBags', lang)}</span>
+                <span>Large Bags</span>
                 <span className="px-2 py-0.5 rounded-full bg-lemon-100 text-amber-900 text-xs font-mono font-bold ml-1">
-                  {calculations.validLargeCount} bags ({calculations.totalLargeWeightKg.toFixed(3)} kg)
+                  {calculations.validLargeCount} ({calculations.totalLargeWeightKg.toFixed(3)} kg)
                 </span>
               </span>
             </div>
@@ -459,21 +459,21 @@ export const NewBillPage: React.FC<NewBillPageProps> = ({
             <button
               type="button"
               onClick={() => addLargeBag()}
-              className="px-4 py-2 rounded-xl bg-lemon-400 hover:bg-lemon-500 text-charcoal-950 font-bold text-xs shadow-xs transition transform active:scale-95"
+              className="px-3 py-1.5 rounded-xl bg-lemon-400 hover:bg-lemon-500 text-charcoal-950 font-bold text-xs shadow-2xs transition"
             >
-              + Add Large Bag
+              + Add
             </button>
           </div>
 
           {/* Quick Preset Buttons */}
-          <div className="flex items-center space-x-1.5 py-1 overflow-x-auto text-xs text-slate-500">
-            <span className="text-[10px] font-bold text-slate-400 whitespace-nowrap">Quick:</span>
+          <div className="flex items-center space-x-1 py-0.5 overflow-x-auto text-xs text-slate-500">
+            <span className="text-[10px] font-bold text-slate-400 whitespace-nowrap mr-1">Quick:</span>
             {[48, 49, 50, 51, 52].map((w) => (
               <button
                 key={w}
                 type="button"
                 onClick={() => addLargeBag(w)}
-                className="px-2.5 py-1 rounded-lg border border-slate-200 bg-slate-50 hover:bg-lemon-100 font-mono font-bold text-charcoal-900 whitespace-nowrap transition"
+                className="px-2 py-0.5 rounded-lg border border-slate-200 bg-slate-50 hover:bg-lemon-100 font-mono font-bold text-xs text-charcoal-900 whitespace-nowrap transition"
               >
                 +{w}kg
               </button>
@@ -481,13 +481,13 @@ export const NewBillPage: React.FC<NewBillPageProps> = ({
           </div>
 
           {/* Bag Input Rows */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
             {largeBags.map((bag, i) => (
               <div
                 key={bag.id}
-                className="flex items-center space-x-2 p-2.5 rounded-2xl bg-slate-50 border border-slate-200 focus-within:bg-white focus-within:ring-2 focus-within:ring-lemon-400 transition"
+                className="flex items-center space-x-2 p-2 rounded-xl bg-slate-50 border border-slate-200 focus-within:bg-white focus-within:ring-2 focus-within:ring-lemon-400 transition"
               >
-                <div className="w-9 h-9 rounded-xl bg-lemon-100 text-amber-900 font-mono font-bold text-xs flex items-center justify-center flex-shrink-0">
+                <div className="w-8 h-8 rounded-lg bg-lemon-100 text-amber-900 font-mono font-bold text-xs flex items-center justify-center flex-shrink-0">
                   #{i + 1}
                 </div>
                 <div className="flex-1 relative">
@@ -495,18 +495,18 @@ export const NewBillPage: React.FC<NewBillPageProps> = ({
                     type="number"
                     step="0.001"
                     min="0.1"
-                    placeholder="Weight (e.g. 50.000)"
+                    placeholder="50.000"
                     value={bag.weightKg}
                     onChange={(e) => updateLargeBag(i, e.target.value)}
-                    className="w-full bg-transparent px-2 py-1 text-base font-mono font-bold text-charcoal-900 focus:outline-none"
+                    className="w-full bg-transparent px-2 py-1 text-sm font-mono font-bold text-charcoal-900 focus:outline-none"
                   />
-                  <span className="absolute right-2 top-2 text-[10px] font-bold text-slate-400">kg</span>
+                  <span className="absolute right-2 top-1.5 text-[10px] font-bold text-slate-400">kg</span>
                 </div>
                 {largeBags.length > 1 && (
                   <button
                     type="button"
                     onClick={() => removeLargeBag(i)}
-                    className="p-1.5 text-slate-400 hover:text-rose-600 transition"
+                    className="p-1 text-slate-400 hover:text-rose-600 transition"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -516,15 +516,15 @@ export const NewBillPage: React.FC<NewBillPageProps> = ({
           </div>
         </div>
 
-        {/* 3. Small Bags Section (No suggestions as requested) */}
-        <div className="bg-white p-5 sm:p-6 rounded-3xl border border-slate-200 shadow-xs space-y-4">
-          <div className="flex flex-wrap items-center justify-between pb-2 border-b border-slate-100 gap-2">
+        {/* 3. Small Bags Section */}
+        <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs space-y-3">
+          <div className="flex items-center justify-between pb-1 border-b border-slate-100 gap-2">
             <div>
               <span className="text-xs font-bold uppercase tracking-wider text-charcoal-900 flex items-center space-x-1.5">
                 <span className="text-base">👜</span>
-                <span>{t('smallBags', lang)}</span>
+                <span>Small Bags</span>
                 <span className="px-2 py-0.5 rounded-full bg-fresh-100 text-fresh-900 text-xs font-mono font-bold ml-1">
-                  {calculations.validSmallCount} bags ({calculations.totalSmallWeightKg.toFixed(3)} kg)
+                  {calculations.validSmallCount} ({calculations.totalSmallWeightKg.toFixed(3)} kg)
                 </span>
               </span>
             </div>
@@ -532,24 +532,24 @@ export const NewBillPage: React.FC<NewBillPageProps> = ({
             <button
               type="button"
               onClick={() => addSmallBag()}
-              className="px-4 py-2 rounded-xl bg-fresh-600 hover:bg-fresh-700 text-white font-bold text-xs shadow-xs transition transform active:scale-95"
+              className="px-3 py-1.5 rounded-xl bg-fresh-600 hover:bg-fresh-700 text-white font-bold text-xs shadow-2xs transition"
             >
-              + Add Small Bag
+              + Add
             </button>
           </div>
 
           {smallBags.length === 0 ? (
-            <div className="p-3.5 rounded-2xl bg-slate-50 border border-dashed border-slate-200 text-center text-xs text-slate-500">
-              No small bags for this farmer. Tap <span className="font-bold text-fresh-700">+ Add Small Bag</span> if needed.
+            <div className="p-2.5 rounded-xl bg-slate-50 border border-dashed border-slate-200 text-center text-xs text-slate-400">
+              No small bags. Tap + Add if needed.
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
               {smallBags.map((bag, i) => (
                 <div
                   key={bag.id}
-                  className="flex items-center space-x-2 p-2.5 rounded-2xl bg-slate-50 border border-slate-200 focus-within:bg-white focus-within:ring-2 focus-within:ring-fresh-500 transition"
+                  className="flex items-center space-x-2 p-2 rounded-xl bg-slate-50 border border-slate-200 focus-within:bg-white focus-within:ring-2 focus-within:ring-fresh-500 transition"
                 >
-                  <div className="w-9 h-9 rounded-xl bg-fresh-100 text-fresh-900 font-mono font-bold text-xs flex items-center justify-center flex-shrink-0">
+                  <div className="w-8 h-8 rounded-lg bg-fresh-100 text-fresh-900 font-mono font-bold text-xs flex items-center justify-center flex-shrink-0">
                     S#{i + 1}
                   </div>
                   <div className="flex-1 relative">
@@ -557,17 +557,17 @@ export const NewBillPage: React.FC<NewBillPageProps> = ({
                       type="number"
                       step="0.001"
                       min="0.1"
-                      placeholder="Weight kg (e.g. 5.000)"
+                      placeholder="5.000"
                       value={bag.weightKg}
                       onChange={(e) => updateSmallBag(i, e.target.value)}
-                      className="w-full bg-transparent px-2 py-1 text-base font-mono font-bold text-charcoal-900 focus:outline-none"
+                      className="w-full bg-transparent px-2 py-1 text-sm font-mono font-bold text-charcoal-900 focus:outline-none"
                     />
-                    <span className="absolute right-2 top-2 text-[10px] font-bold text-slate-400">kg</span>
+                    <span className="absolute right-2 top-1.5 text-[10px] font-bold text-slate-400">kg</span>
                   </div>
                   <button
                     type="button"
                     onClick={() => removeSmallBag(i)}
-                    className="p-1.5 text-slate-400 hover:text-rose-600 transition"
+                    className="p-1 text-slate-400 hover:text-rose-600 transition"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -577,40 +577,37 @@ export const NewBillPage: React.FC<NewBillPageProps> = ({
           )}
         </div>
 
-        {/* 4. Pandlu Bags Section (Ripe / Yellow Lemons with different price) */}
-        <div className="bg-white p-5 sm:p-6 rounded-3xl border border-amber-200 shadow-xs space-y-4 bg-gradient-to-b from-amber-50/30 to-white">
-          <div className="flex flex-wrap items-center justify-between pb-2 border-b border-amber-100 gap-2">
+        {/* 4. Pandlu Bags Section */}
+        <div className="bg-white p-4 sm:p-5 rounded-2xl border border-amber-200 shadow-xs space-y-3">
+          <div className="flex items-center justify-between pb-1 border-b border-amber-100 gap-2">
             <div>
               <span className="text-xs font-bold uppercase tracking-wider text-amber-950 flex items-center space-x-1.5">
                 <span className="text-base">🍋</span>
                 <span>Ripe Lemon Bags (Pandlu)</span>
-                <span className="px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 text-xs font-mono font-bold ml-1 border border-amber-200">
-                  {calculations.validPandluCount} bags ({calculations.totalPandluWeightKg.toFixed(3)} kg)
+                <span className="px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 text-xs font-mono font-bold ml-1">
+                  {calculations.validPandluCount} ({calculations.totalPandluWeightKg.toFixed(3)} kg)
                 </span>
               </span>
-              <p className="text-[11px] text-amber-800 font-medium mt-0.5">
-                Ripe lemon bags have a different market price from normal green lemons.
-              </p>
             </div>
 
             <button
               type="button"
               onClick={() => addPandluBag()}
-              className="px-4 py-2 rounded-xl bg-amber-400 hover:bg-amber-500 text-amber-950 font-bold text-xs shadow-xs transition transform active:scale-95 border border-amber-500/40"
+              className="px-3 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-500 text-amber-950 font-bold text-xs shadow-2xs transition"
             >
-              + Add Ripe Bag
+              + Add
             </button>
           </div>
 
           {/* Quick presets for Pandlu */}
-          <div className="flex items-center space-x-1.5 py-1 overflow-x-auto text-xs text-slate-500">
-            <span className="text-[10px] font-bold text-amber-700 whitespace-nowrap">Quick:</span>
+          <div className="flex items-center space-x-1 py-0.5 overflow-x-auto text-xs text-slate-500">
+            <span className="text-[10px] font-bold text-amber-700 whitespace-nowrap mr-1">Quick:</span>
             {[48, 49, 50, 51, 52].map((w) => (
               <button
                 key={w}
                 type="button"
                 onClick={() => addPandluBag(w)}
-                className="px-2.5 py-1 rounded-lg border border-amber-200 bg-amber-50 hover:bg-amber-100 font-mono font-bold text-amber-950 whitespace-nowrap transition"
+                className="px-2 py-0.5 rounded-lg border border-amber-200 bg-amber-50 hover:bg-amber-100 font-mono font-bold text-xs text-amber-950 whitespace-nowrap transition"
               >
                 +{w}kg
               </button>
@@ -618,17 +615,17 @@ export const NewBillPage: React.FC<NewBillPageProps> = ({
           </div>
 
           {pandluBags.length === 0 ? (
-            <div className="p-3.5 rounded-2xl bg-amber-50/50 border border-dashed border-amber-200 text-center text-xs text-amber-800">
-              No ripe lemon bags for this lot. Tap "+ Add Ripe Bag" if this farmer brought ripe lemons.
+            <div className="p-2.5 rounded-xl bg-amber-50/50 border border-dashed border-amber-200 text-center text-xs text-amber-800">
+              No ripe lemon bags. Tap + Add if needed.
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
               {pandluBags.map((bag, i) => (
                 <div
                   key={bag.id}
-                  className="flex items-center space-x-2 p-2.5 rounded-2xl bg-amber-50/60 border border-amber-200 focus-within:bg-white focus-within:ring-2 focus-within:ring-amber-400 transition"
+                  className="flex items-center space-x-2 p-2 rounded-xl bg-amber-50/60 border border-amber-200 focus-within:bg-white focus-within:ring-2 focus-within:ring-amber-400 transition"
                 >
-                  <div className="w-9 h-9 rounded-xl bg-amber-200 text-amber-950 font-mono font-bold text-xs flex items-center justify-center flex-shrink-0">
+                  <div className="w-8 h-8 rounded-lg bg-amber-200 text-amber-950 font-mono font-bold text-xs flex items-center justify-center flex-shrink-0">
                     P#{i + 1}
                   </div>
                   <div className="flex-1 relative">
@@ -636,17 +633,17 @@ export const NewBillPage: React.FC<NewBillPageProps> = ({
                       type="number"
                       step="0.001"
                       min="0.1"
-                      placeholder="Weight kg (e.g. 50.000)"
+                      placeholder="50.000"
                       value={bag.weightKg}
                       onChange={(e) => updatePandluBag(i, e.target.value)}
-                      className="w-full bg-transparent px-2 py-1 text-base font-mono font-bold text-charcoal-900 focus:outline-none"
+                      className="w-full bg-transparent px-2 py-1 text-sm font-mono font-bold text-charcoal-900 focus:outline-none"
                     />
-                    <span className="absolute right-2 top-2 text-[10px] font-bold text-slate-400">kg</span>
+                    <span className="absolute right-2 top-1.5 text-[10px] font-bold text-slate-400">kg</span>
                   </div>
                   <button
                     type="button"
                     onClick={() => removePandluBag(i)}
-                    className="p-1.5 text-slate-400 hover:text-rose-600 transition"
+                    className="p-1 text-slate-400 hover:text-rose-600 transition"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -656,35 +653,25 @@ export const NewBillPage: React.FC<NewBillPageProps> = ({
           )}
         </div>
 
-        {/* 5. Total Weight Summary & Main Save Button */}
-        <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
-          <div className="p-4 bg-slate-100 rounded-2xl border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        {/* 5. Sticky Bottom Summary & Save Button */}
+        <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+          <div className="flex items-center justify-between">
             <div>
-              <span className="text-xs font-bold uppercase text-slate-500 block">Total Bags & Weight</span>
-              <div className="text-2xl sm:text-3xl font-mono font-black text-charcoal-900 mt-0.5">
-                {calculations.totalBags} <span className="text-sm font-bold text-slate-500">bags</span> •{' '}
+              <span className="text-[11px] font-bold uppercase text-slate-400 block">Total</span>
+              <div className="text-xl sm:text-2xl font-mono font-black text-charcoal-900">
+                {calculations.totalBags} <span className="text-xs font-bold text-slate-500">bags</span> •{' '}
                 <span className="text-fresh-700">{calculations.totalWeightKg.toFixed(3)} kg</span>
               </div>
-              <p className="text-xs text-slate-500 mt-1">
-                {calculations.validLargeCount} Large ({calculations.totalLargeWeightKg.toFixed(3)}kg)
-                {calculations.validSmallCount > 0 ? ` + ${calculations.validSmallCount} Small (${calculations.totalSmallWeightKg.toFixed(3)}kg)` : ''}
-                {calculations.validPandluCount > 0 ? ` + ${calculations.validPandluCount} Pandlu (${calculations.totalPandluWeightKg.toFixed(3)}kg)` : ''}
-              </p>
             </div>
 
-            {/* THE ONE MAIN BUTTON: SAVE WEIGHTS ONLY! */}
             <button
               type="submit"
               disabled={isSubmitting || calculations.totalBags === 0 || !selectedCustomerId}
-              className="px-8 py-4 rounded-2xl bg-lemon-400 hover:bg-lemon-500 text-charcoal-950 text-base font-black shadow-md border-2 border-lemon-500/40 transition transform active:scale-95 disabled:opacity-50 flex items-center justify-center space-x-2"
+              className="px-6 py-3 rounded-xl bg-lemon-400 hover:bg-lemon-500 text-charcoal-950 text-sm font-black shadow-md transition transform active:scale-95 disabled:opacity-50 flex items-center space-x-1.5"
             >
-              <span>{isSubmitting ? 'Saving...' : '💾 SAVE WEIGHTS ONLY'}</span>
-              <ArrowRight className="w-5 h-5" />
+              <span>{isSubmitting ? 'Saving...' : 'Save Weights'}</span>
+              <ArrowRight className="w-4 h-4" />
             </button>
-          </div>
-
-          <div className="text-center text-xs text-slate-400">
-            Price and final bill can be added later whenever you want from the <strong>Lots & Bills</strong> tab.
           </div>
         </div>
       </form>
