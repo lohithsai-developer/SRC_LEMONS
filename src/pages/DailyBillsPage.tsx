@@ -524,7 +524,6 @@ export const DailyBillsPage: React.FC<DailyBillsPageProps> = ({
 
                   <div className="p-3 bg-slate-50 rounded-2xl border border-slate-200 text-xs flex justify-between">
                     <span>{bill.totalBags} Bags • {bill.totalWeight.toFixed(2)}kg @ ₹{bill.pricePerKg}</span>
-                    <span className="font-bold text-fresh-700">Paid: ₹{bill.amountPaid.toFixed(2)}</span>
                   </div>
 
                   <div className="flex items-center justify-end space-x-2 pt-1">

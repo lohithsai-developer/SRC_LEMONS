@@ -34,14 +34,14 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header className="sticky top-0 z-40 bg-white border-b border-slate-200/90 shadow-xs">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Brand Logo with SRC LEMONS Emblem */}
           <div
             className="flex items-center cursor-pointer select-none"
             onClick={() => setActiveTab('dashboard')}
           >
-            <Logo size="md" showText={true} />
+            <Logo size="sm" showText={true} />
           </div>
 
           {/* Desktop Navigation Links - Clean, Professional & Subtle */}

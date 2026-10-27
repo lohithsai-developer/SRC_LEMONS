@@ -106,9 +106,9 @@ const DEFAULT_SETTINGS: BusinessSettings = {
   id: 'settings-default',
   businessName: 'SRC LEMONS',
   businessNameTelugu: 'SRC LEMONS',
-  merchantName: 'K. Srinivasa Rao',
-  phone: '+91 98480 99999',
-  address: 'Lemon Wholesale Market Yard, Gudur, AP',
+  merchantName: 'SRC LEMONS',
+  phone: '9441728444',
+  address: 'Lakshmipuram Market Yard, Eluru District',
   defaultRatePerKg: 40.0,
   defaultCommissionRate: 5.0, // 5% commission
   defaultLabourPerBag: 10.0, // ₹10 per bag hamali

@@ -181,7 +181,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
         <div>
           <h2 className="text-xl sm:text-2xl font-black text-charcoal-900 tracking-tight flex items-center space-x-2">
             <span>🍋</span>
-            <span>Lemon Dashboard</span>
+            <span>Dashboard</span>
           </h2>
           <p className="text-xs text-slate-500 font-medium mt-0.5">
             {new Date(selectedDate).toLocaleDateString('en-IN', {

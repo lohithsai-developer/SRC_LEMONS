@@ -97,9 +97,6 @@ export const BillReceiptModal: React.FC<BillReceiptModalProps> = ({
         }
         text += `━━━━━━━━━━━━━━━━━━━━━\n`;
         text += `💵 *NET PAYABLE TO FARMER:* ₹${bill.netPayable.toFixed(2)}\n`;
-        text += `✅ *Amount Paid:* ₹${bill.amountPaid.toFixed(2)}\n`;
-        text += `⚠️ *Balance Due:* ₹${bill.balanceAmount.toFixed(2)}\n`;
-        text += `📌 *Status:* ${bill.paymentStatus}\n`;
       }
     } else {
       text += `🏷️ *Rate:* Auction price pending (Will be calculated once rate is set)\n`;
@@ -145,13 +142,13 @@ export const BillReceiptModal: React.FC<BillReceiptModalProps> = ({
           <div className="text-center pb-4 border-b-2 border-dashed border-slate-300 flex flex-col items-center">
             <Logo size="lg" />
             <h2 className="text-xl sm:text-2xl font-black text-charcoal-900 tracking-tight mt-2">
-              {settings?.businessName || 'SRC LEMONS'}
+              SRC LEMONS
             </h2>
             <p className="text-xs text-slate-600 mt-1 max-w-sm">
-              {settings?.address || 'Lemon Wholesale Market Yard, Gudur, Andhra Pradesh'}
+              Lakshmipuram Market Yard, Eluru District
             </p>
             <p className="text-xs font-semibold text-slate-700 mt-0.5">
-              📞 {settings?.phone || '+91 98480 99999'}
+              📞 9441728444
             </p>
           </div>
 
@@ -173,25 +170,6 @@ export const BillReceiptModal: React.FC<BillReceiptModalProps> = ({
                   year: 'numeric',
                 })}
               </p>
-              <span
-                className={`inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase mt-1 ${
-                  bill.stage === 'WEIGHED'
-                    ? 'bg-amber-100 text-amber-900 border border-amber-300'
-                    : bill.stage === 'PRICED'
-                    ? 'bg-blue-100 text-blue-900 border border-blue-300'
-                    : bill.paymentStatus === 'PAID'
-                    ? 'bg-fresh-100 text-fresh-800'
-                    : bill.paymentStatus === 'PARTIALLY_PAID'
-                    ? 'bg-lemon-100 text-amber-900'
-                    : 'bg-rose-100 text-rose-800'
-                }`}
-              >
-                {bill.stage === 'WEIGHED'
-                  ? 'Weights Saved • Price Pending'
-                  : bill.stage === 'PRICED'
-                  ? 'Priced • Ready to Bill'
-                  : bill.paymentStatus}
-              </span>
             </div>
           </div>
 
@@ -321,24 +299,10 @@ export const BillReceiptModal: React.FC<BillReceiptModalProps> = ({
 
                 {/* Net Payable to Farmer */}
                 {bill.stage === 'FINAL_BILLED' && (
-                  <>
-                    <div className="flex justify-between items-center py-2.5 px-3 bg-fresh-100/90 rounded-xl border border-fresh-300 font-black text-sm text-fresh-950 mt-2">
-                      <span>Net Payable to Farmer:</span>
-                      <span className="font-mono text-lg font-black">₹{bill.netPayable.toFixed(2)}</span>
-                    </div>
-
-                    <div className="flex justify-between items-center pt-1 px-1 text-slate-700">
-                      <span>Amount Paid on Spot:</span>
-                      <span className="font-mono font-bold text-fresh-700">₹{bill.amountPaid.toFixed(2)}</span>
-                    </div>
-
-                    <div className="flex justify-between items-center px-1 text-slate-700">
-                      <span>Remaining Balance Due:</span>
-                      <span className={`font-mono font-black ${bill.balanceAmount > 0 ? 'text-rose-600 font-bold' : 'text-slate-600'}`}>
-                        ₹{bill.balanceAmount.toFixed(2)}
-                      </span>
-                    </div>
-                  </>
+                  <div className="flex justify-between items-center py-2.5 px-3 bg-fresh-100/90 rounded-xl border border-fresh-300 font-black text-sm text-fresh-950 mt-2">
+                    <span>Net Payable to Farmer:</span>
+                    <span className="font-mono text-lg font-black">₹{bill.netPayable.toFixed(2)}</span>
+                  </div>
                 )}
               </>
             ) : (
